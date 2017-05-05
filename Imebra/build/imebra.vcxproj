@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{D901C089-8DAC-331C-B8B0-654A76FF7932}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>imebra</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Projects\GIT\SIM_project\Imebra\build\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imebra.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imebra</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Projects\GIT\SIM_project\Imebra\build\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imebra.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imebra</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions)  /Wp64</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;IMEBRA_USE_WINDOWS_CHARSET;IMEBRA_DLL;IMEBRA_DLL_EXPORTS;NOMINMAX;CMAKE_INTDIR="Debug";imebra_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;IMEBRA_USE_WINDOWS_CHARSET;IMEBRA_DLL;IMEBRA_DLL_EXPORTS;NOMINMAX;CMAKE_INTDIR=\"Debug\";imebra_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Projects/GIT/SIM_project/Imebra/build/Debug/imebra.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Projects/GIT/SIM_project/Imebra/build/Debug/imebra.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions)  /Wp64</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;IMEBRA_USE_WINDOWS_CHARSET;IMEBRA_DLL;IMEBRA_DLL_EXPORTS;NOMINMAX;CMAKE_INTDIR="Release";imebra_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;IMEBRA_USE_WINDOWS_CHARSET;IMEBRA_DLL;IMEBRA_DLL_EXPORTS;NOMINMAX;CMAKE_INTDIR=\"Release\";imebra_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Projects\GIT\SIM_project\Imebra\library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Projects/GIT/SIM_project/Imebra/build/Release/imebra.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Projects/GIT/SIM_project/Imebra/build/Release/imebra.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Projects\GIT\SIM_project\Imebra\library\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Projects/GIT/SIM_project/Imebra/library/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Projects/GIT/SIM_project/Imebra/library -BD:/Projects/GIT/SIM_project/Imebra/build --check-stamp-file D:/Projects/GIT/SIM_project/Imebra/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Projects/GIT/SIM_project/Imebra/library/CMakeLists.txt;D:\Projects\GIT\SIM_project\Imebra\library\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystem.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\feature_tests.cxx;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.8\Templates\CPackConfig.cmake.in;C:\Program Files\CMake\share\cmake-3.8\Templates\CPackConfig.cmake.in;D:\Projects\GIT\SIM_project\Imebra\library\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Projects/GIT/SIM_project/Imebra/library/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Projects/GIT/SIM_project/Imebra/library -BD:/Projects/GIT/SIM_project/Imebra/build --check-stamp-file D:/Projects/GIT/SIM_project/Imebra/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Projects/GIT/SIM_project/Imebra/library/CMakeLists.txt;D:\Projects\GIT\SIM_project\Imebra\library\CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystem.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MIPSpro-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\Compiler\MSVC-CXX-FeatureTests.cmake;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\feature_tests.cxx;C:\Program Files\CMake\share\cmake-3.8\Modules\CMakeCXXCompiler.cmake.in;D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\3.8.0\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.8\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.8\Templates\CPackConfig.cmake.in;C:\Program Files\CMake\share\cmake-3.8\Templates\CPackConfig.cmake.in;D:\Projects\GIT\SIM_project\Imebra\library\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Projects\GIT\SIM_project\Imebra\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\LUTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME1ToMONOCHROME2Impl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME1ToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME2ToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME2ToYBRFULLImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\PALETTECOLORToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToMONOCHROME2Impl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRFULLImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRPARTIALImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRRCTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\VOILUTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRFULLToMONOCHROME2Impl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRFULLToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRPARTIALToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRRCTToRGBImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\baseStreamImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\bufferImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\bufferStreamImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionBaseImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionICUImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionIconvImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionJavaImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionWindowsImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetsListImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\codecFactoryImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\colorTransformImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\colorTransformsFactoryImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\configurationImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateTimeBaseImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateTimeImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerNumericImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringAEImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringASImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringCSImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringDSImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringISImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringLOImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringLTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringPNImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringSHImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringSTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUCImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUIImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringURImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUnicodeImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerTimeImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataSetImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomDictImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomDirImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomImageCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomStreamCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\drawBitmapImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\exceptionImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\fileStreamImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\huffmanTableImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\imageCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\imageImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\imebraDocImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpeg2000ImageCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegCodecBaseImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegImageCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegStreamCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\memoryImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\memoryStreamImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\modalityVOILUTImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\nullStreamImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamCodecImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamControllerImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamReaderImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamWriterImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\tagsDescription.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformHighBitImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformsChainImpl.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\src\onload.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\VOILUT.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\baseStreamInput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\baseStreamOutput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\codecFactory.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\colorTransformsFactory.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\dataSet.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\definitions.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\dicomDictionary.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\dicomDir.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\dicomDirEntry.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\drawBitmap.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\exceptions.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\fileStreamInput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\fileStreamOutput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\image.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\imebra.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\lut.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\memoryPool.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\memoryStreamInput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\memoryStreamOutput.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\modalityVOILUT.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\readMemory.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\readWriteMemory.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\readingDataHandler.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\readingDataHandlerNumeric.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\streamReader.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\streamWriter.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\tag.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\tagId.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\tagsEnumeration.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\transform.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\transformHighBit.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\transformsChain.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\writingDataHandler.h" />
+    <ClInclude Include="D:\Projects\GIT\SIM_project\Imebra\library\include\imebra\writingDataHandlerNumeric.h" />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\LUTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME1ToMONOCHROME2Impl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME1ToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME2ToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\MONOCHROME2ToYBRFULLImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\PALETTECOLORToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToMONOCHROME2Impl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRFULLImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRPARTIALImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\RGBToYBRRCTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\VOILUTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRFULLToMONOCHROME2Impl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRFULLToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRPARTIALToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\YBRRCTToRGBImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\baseStreamImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\bufferImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionBaseImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionICUImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionIconvImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionJavaImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetConversionWindowsImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\charsetsListImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\codecFactoryImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\colorTransformImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\colorTransformsFactoryImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateTimeBaseImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerDateTimeImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerNumericImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringAEImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringASImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringCSImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringDSImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringISImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringLOImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringLTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringPNImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringSHImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringSTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUCImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUIImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringURImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerStringUnicodeImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataHandlerTimeImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dataSetImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomDictImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomDirImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomImageCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\dicomStreamCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\drawBitmapImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\exceptionImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\fileStreamImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\huffmanTableImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\imageCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\imageImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpeg2000ImageCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegCodecBaseImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegImageCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\jpegStreamCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\memoryImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\memoryStreamImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\modalityVOILUTImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamCodecImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamControllerImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamReaderImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\streamWriterImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformHighBitImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\implementation\transformsChainImpl.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\VOILUT.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\baseStreamInput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\baseStreamOutput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\codecFactory.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\colorTransformsFactory.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\dataSet.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\definitions.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\dicomDictionary.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\dicomDir.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\dicomDirEntry.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\drawBitmap.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\exceptions.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\fileStreamInput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\fileStreamOutput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\image.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\lut.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\memoryPool.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\memoryStreamInput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\memoryStreamOutput.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\modalityVOILUT.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\onload.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\readMemory.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\readWriteMemory.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\readingDataHandler.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\readingDataHandlerNumeric.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\streamReader.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\streamWriter.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\tag.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\tagId.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\transform.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\transformHighBit.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\transformsChain.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\writingDataHandler.cpp"  />
+    <ClCompile Include="D:\Projects\GIT\SIM_project\Imebra\library\src\writingDataHandlerNumeric.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Projects\GIT\SIM_project\Imebra\build\ZERO_CHECK.vcxproj">
+      <Project>E8B80ED5-FDE3-31D2-9130-20BB5103694A</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
