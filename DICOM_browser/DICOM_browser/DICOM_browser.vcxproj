@@ -143,10 +143,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DicomData.cpp" />
     <ClCompile Include="DicomInterface.cpp" />
     <ClCompile Include="MainView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DicomData.h" />
     <ClInclude Include="DicomInterface.h" />
     <ClInclude Include="MainView.h">
       <FileType>CppForm</FileType>
@@ -156,10 +158,6 @@
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.h</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="C:\Users\atyne\Downloads\test.png" />
-    <Image Include="pictureBox1.Image.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

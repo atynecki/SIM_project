@@ -1,47 +1,37 @@
 #include "DicomInterface.h"
-#include <string.h>
 #include <list>
 
 using namespace System::Runtime::InteropServices;
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Drawing::Imaging;
+using namespace std;
+using namespace imebra;
 
 DicomInterface* DicomInterface::s_instance = NULL;
+DicomData* DicomInterface::dicomData = NULL;
 
 DicomInterface* DicomInterface::getInstance()
 {
 	if (!s_instance)
+	{
 		s_instance = new DicomInterface;
+		dicomData = new DicomData;
+	}
+		
 	return s_instance;
 }
 
-void DicomInterface::loadDataSet()
+void DicomInterface::loadPatientName()
 {
-	this->dataSet = std::unique_ptr<imebra::DataSet>(imebra::CodecFactory::load("CT-MONO2-16-brain"));
+	std::string patientName = this->dataSet->getString(imebra::TagId(imebra::tagId_t::PatientName_0010_0010), 0);
+	dicomData->setPatientName(patientName);
 }
 
-std::string DicomInterface::getPatientName()
+void DicomInterface::loadImage()
 {
-	std::wstring patientNameCharacter = this->dataSet->getUnicodeString(imebra::TagId(imebra::tagId_t::PatientName_0010_0010), 0);
-	std::string result(patientNameCharacter.begin(), patientNameCharacter.end());
-	return result;
-}
+	std::unique_ptr<imebra::Image> image(this->dataSet->getImageApplyModalityTransform(0));
 
-std::string DicomInterface::getStudyDescription()
-{
-	std::string studyDesc = this->dataSet->getString(imebra::TagId(imebra::tagId_t::StudyDescription_0008_1030), 1);
-	//std::string result((const char*)&studyDesc[0], sizeof(wchar_t) / sizeof(char)*studyDesc.size());
-
-	return studyDesc;
-}
-
-Bitmap^ DicomInterface::getImage(int index)
-{
-	Bitmap^ ret = nullptr;
-
-	std::unique_ptr<imebra::Image> image(this->dataSet->getImageApplyModalityTransform(index));
-	
 	// Get the color space
 	std::string colorSpace = image->getColorSpace();
 
@@ -51,7 +41,7 @@ Bitmap^ DicomInterface::getImage(int index)
 
 	imebra::TransformsChain chain;
 
-	if (imebra::ColorTransformsFactory::isMonochrome(image->getColorSpace()))
+	if (imebra::ColorTransformsFactory::isMonochrome(colorSpace))
 	{
 		// Allocate a VOILUT transform. If the DataSet does not contain any pre-defined
 		//  settings then we will find the optimal ones.
@@ -66,7 +56,7 @@ Bitmap^ DicomInterface::getImage(int index)
 		{
 			try
 			{
-				luts.push_back(std::shared_ptr<imebra::LUT> (this->dataSet->getLUT(imebra::TagId(imebra::tagId_t::VOILUTSequence_0028_3010), scanLUTs)));
+				luts.push_back(std::shared_ptr<imebra::LUT>(this->dataSet->getLUT(imebra::TagId(imebra::tagId_t::VOILUTSequence_0028_3010), scanLUTs)));
 
 			}
 			catch (const imebra::MissingDataElementError&)
@@ -100,14 +90,40 @@ Bitmap^ DicomInterface::getImage(int index)
 		std::string buffer(requestedBufferSize, char(0));
 		draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGBA, 4, &(buffer.at(0)), requestedBufferSize);
 
-		String^ buffer_ptr = gcnew String(buffer.c_str());
-		IntPtr sptr = Marshal::StringToHGlobalAnsi(buffer_ptr);
-		ret = gcnew Bitmap(width, height, 4*width, Imaging::PixelFormat::Format32bppRgb, sptr);
-
-		return ret;
+		dicomData->setImage(buffer, width, height);
 	}
-
-	return {};
 }
+
+void DicomInterface::loadData(string path)
+{
+	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
+	loadPatientName();
+	loadImage();
+}
+
+Bitmap^ DicomInterface::getImage()
+{
+	Bitmap^ ret = nullptr;
+	string buffer;
+	uint32_t width;
+	uint32_t height;
+
+	dicomData->getImage(&buffer, &width, &height);
+
+	String^ buffer_ptr = gcnew String(buffer.c_str());
+	IntPtr sptr = Marshal::StringToHGlobalAnsi(buffer_ptr);
+	ret = gcnew Bitmap(width, height, 4 * width, Imaging::PixelFormat::Format32bppRgb, sptr);
+	
+	return ret;
+}
+
+String^ DicomInterface::getName()
+{	
+	String^ ret = nullptr;
+
+	ret = gcnew String(dicomData->getPatientName().c_str());
+	return ret;
+}
+
 
 

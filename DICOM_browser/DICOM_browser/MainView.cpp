@@ -12,9 +12,9 @@ void main(array<String^>^ args)
 
 	DICOM_browser::MainView mainView;
 
-	DicomInterface::getInstance()->loadDataSet();
-	Bitmap^ image = DicomInterface::getInstance()->getImage(0);
-	mainView.setImage(image);
+	DicomInterface::getInstance()->loadData("CT-MONO2-16-ankle");
+	mainView.setImage(DicomInterface::getInstance()->getImage());
+	mainView.setName(DicomInterface::getInstance()->getName());
 	Application::Run(%mainView);
 }
 

@@ -36,6 +36,14 @@ namespace DICOM_browser {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::LinkLabel^  linkLabel1;
+	private: System::Windows::Forms::Label^  label1;
+	public:
+		void setName(String^ name)
+		{
+			this->label1->Text = name;
+		}
+	protected:
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	public:
 		void setImage(Bitmap^ image)
@@ -59,6 +67,8 @@ namespace DICOM_browser {
 		void InitializeComponent(void)
 		{
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -66,21 +76,51 @@ namespace DICOM_browser {
 			// 
 			this->pictureBox1->Location = System::Drawing::Point(12, 23);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(1169, 651);
+			this->pictureBox1->Size = System::Drawing::Size(747, 651);
+			this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			// 
+			// linkLabel1
+			// 
+			this->linkLabel1->AutoSize = true;
+			this->linkLabel1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->linkLabel1->LinkColor = System::Drawing::Color::Black;
+			this->linkLabel1->Location = System::Drawing::Point(870, 48);
+			this->linkLabel1->Name = L"linkLabel1";
+			this->linkLabel1->Size = System::Drawing::Size(235, 40);
+			this->linkLabel1->TabIndex = 1;
+			this->linkLabel1->TabStop = true;
+			this->linkLabel1->Text = L"Patient Name";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label1->ForeColor = System::Drawing::Color::Navy;
+			this->label1->Location = System::Drawing::Point(873, 127);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(225, 40);
+			this->label1->TabIndex = 2;
+			this->label1->Text = L"patient name";
 			// 
 			// MainView
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1206, 694);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->linkLabel1);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MainView";
 			this->Text = L"DICOM Browser";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &MainView::MainView_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
