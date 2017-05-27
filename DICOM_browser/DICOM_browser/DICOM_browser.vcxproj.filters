@@ -17,7 +17,7 @@
     <ClCompile Include="DicomInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DicomData.cpp">
+    <ClCompile Include="DataRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,8 +28,14 @@
     <ClInclude Include="DicomInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DicomData.h">
+    <ClInclude Include="DataRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainView.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CONFIG.txt" />
   </ItemGroup>
 </Project>

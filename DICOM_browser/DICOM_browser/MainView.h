@@ -1,5 +1,8 @@
 #pragma once
 
+#include "DicomInterface.h"
+#include <list>
+
 namespace DICOM_browser {
 
 	using namespace System;
@@ -8,6 +11,8 @@ namespace DICOM_browser {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Runtime::InteropServices;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for MainView
@@ -45,6 +50,7 @@ namespace DICOM_browser {
 		}
 	protected:
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+			 Bitmap^ image;
 	public:
 		void setImage(Bitmap^ image)
 		{
@@ -76,7 +82,6 @@ namespace DICOM_browser {
 			// 
 			this->pictureBox1->Location = System::Drawing::Point(12, 23);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(747, 651);
 			this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
@@ -124,7 +129,35 @@ namespace DICOM_browser {
 
 		}
 #pragma endregion
+
+#pragma region View controller code
+		private:
+			void loadDicomData(std::string path)
+			{
+				DicomInterface::getInstance()->loadData(path);
+			}
+
+			void displayDicomImage()
+			{
+				uint32_t width;
+				uint32_t height;
+				std::string imageBuffer;
+
+				imageBuffer = DicomInterface::getInstance()->getImage(&width, &height);
+				String^ buffer_ptr = gcnew String(imageBuffer.c_str());
+				IntPtr sptr = Marshal::StringToHGlobalAnsi(buffer_ptr);
+				Bitmap^ image = gcnew Bitmap(width, height, 4*width, Imaging::PixelFormat::Format32bppArgb, sptr);
+				this->pictureBox1->Image = image;
+			}
+#pragma endregion
+
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
+		
+		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-ankle");
+		displayDicomImage();
+
+		std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
+		std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
 	}
 	};
 }

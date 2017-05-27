@@ -1,5 +1,4 @@
 #include "DicomInterface.h"
-#include <list>
 
 using namespace System::Runtime::InteropServices;
 using namespace System;
@@ -9,35 +8,37 @@ using namespace std;
 using namespace imebra;
 
 DicomInterface* DicomInterface::s_instance = NULL;
-DicomData* DicomInterface::dicomData = NULL;
 
 DicomInterface* DicomInterface::getInstance()
 {
 	if (!s_instance)
 	{
 		s_instance = new DicomInterface;
-		dicomData = new DicomData;
 	}
 		
 	return s_instance;
 }
 
-void DicomInterface::loadPatientName()
-{
-	std::string patientName = this->dataSet->getString(imebra::TagId(imebra::tagId_t::PatientName_0010_0010), 0);
-	dicomData->setPatientName(patientName);
-}
-
 void DicomInterface::loadImage()
 {
-	std::unique_ptr<imebra::Image> image(this->dataSet->getImageApplyModalityTransform(0));
+	this->image = unique_ptr<imebra::Image>(this->dataSet->getImageApplyModalityTransform(0));
+}
 
+/*API function*/
+void DicomInterface::loadData(string path)
+{
+	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
+	loadImage();
+}
+
+string DicomInterface::getImage(uint32_t* width, uint32_t* height)
+{
 	// Get the color space
 	std::string colorSpace = image->getColorSpace();
 
 	// Get the size in pixels
-	std::uint32_t width = image->getWidth();
-	std::uint32_t height = image->getHeight();
+	*width = image->getWidth();
+	*height = image->getHeight();
 
 	imebra::TransformsChain chain;
 
@@ -75,7 +76,7 @@ void DicomInterface::loadImage()
 		}
 		else
 		{
-			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, width, height);
+			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, *width, *height);
 		}
 
 		chain.addTransform(voilutTransform);
@@ -89,41 +90,39 @@ void DicomInterface::loadImage()
 		// Now we allocate the buffer and then ask DrawBitmap to fill it
 		std::string buffer(requestedBufferSize, char(0));
 		draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGBA, 4, &(buffer.at(0)), requestedBufferSize);
+		return buffer;
+	}
+	else
+	{
+		imebra::DrawBitmap draw(chain);
+		// Ask for the size of the buffer (in bytes)
+		size_t requestedBufferSize = draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGB, 4, 0, 0);
 
-		dicomData->setImage(buffer, width, height);
+		// Now we allocate the buffer and then ask DrawBitmap to fill it
+		std::string buffer(requestedBufferSize, char(0));
+		draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGB, 4, &(buffer.at(0)), requestedBufferSize);
+		return buffer;
 	}
 }
 
-void DicomInterface::loadData(string path)
+list<string> DicomInterface::getDataRecordDescriptionList()
 {
-	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
-	loadPatientName();
-	loadImage();
+	list<string> descriptions;
+
+	descriptions.push_front("PatientName(0010,0010)");
+
+	return descriptions;
 }
 
-Bitmap^ DicomInterface::getImage()
+list<string> DicomInterface::getDataRecordValueList()
 {
-	Bitmap^ ret = nullptr;
-	string buffer;
-	uint32_t width;
-	uint32_t height;
+	list<string> values;
 
-	dicomData->getImage(&buffer, &width, &height);
+	values.push_front("Jan Kowalski");
 
-	String^ buffer_ptr = gcnew String(buffer.c_str());
-	IntPtr sptr = Marshal::StringToHGlobalAnsi(buffer_ptr);
-	ret = gcnew Bitmap(width, height, 4 * width, Imaging::PixelFormat::Format32bppRgb, sptr);
-	
-	return ret;
+	return values;
 }
 
-String^ DicomInterface::getName()
-{	
-	String^ ret = nullptr;
-
-	ret = gcnew String(dicomData->getPatientName().c_str());
-	return ret;
-}
 
 
 

@@ -143,12 +143,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DicomData.cpp" />
+    <ClCompile Include="DataRecord.cpp" />
     <ClCompile Include="DicomInterface.cpp" />
     <ClCompile Include="MainView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DicomData.h" />
+    <ClInclude Include="DataRecord.h" />
     <ClInclude Include="DicomInterface.h" />
     <ClInclude Include="MainView.h">
       <FileType>CppForm</FileType>
@@ -158,6 +158,9 @@
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CONFIG.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
