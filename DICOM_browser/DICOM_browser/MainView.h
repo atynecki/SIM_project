@@ -11,6 +11,7 @@ namespace DICOM_browser {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Drawing::Imaging;
 	using namespace System::Runtime::InteropServices;
 	using namespace System::IO;
 
@@ -137,27 +138,39 @@ namespace DICOM_browser {
 				DicomInterface::getInstance()->loadData(path);
 			}
 
-			void displayDicomImage()
+			Bitmap^ loadDicomImage()
 			{
 				uint32_t width;
 				uint32_t height;
 				std::string imageBuffer;
 
 				imageBuffer = DicomInterface::getInstance()->getImage(&width, &height);
-				String^ buffer_ptr = gcnew String(imageBuffer.c_str());
-				IntPtr sptr = Marshal::StringToHGlobalAnsi(buffer_ptr);
-				Bitmap^ image = gcnew Bitmap(width, height, 4*width, Imaging::PixelFormat::Format32bppArgb, sptr);
-				this->pictureBox1->Image = image;
+				Bitmap^ image = gcnew Bitmap(width, height);
+
+				BitmapData^ bmpData = image->LockBits(System::Drawing::Rectangle(0, 0, width, height),
+					ImageLockMode::ReadWrite, PixelFormat::Format32bppRgb);
+				cli::array<Byte>^ pixels = gcnew cli::array<Byte>(imageBuffer.size());
+				Marshal::Copy(IntPtr(&imageBuffer[0]), pixels, 0, imageBuffer.size());
+				Marshal::Copy(pixels, 0, bmpData->Scan0, imageBuffer.size());
+				image->UnlockBits(bmpData);
+
+				return image;
+			}
+
+			void displayDicomImage()
+			{
+				this->pictureBox1->Image = loadDicomImage();
+				this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			}
 #pragma endregion
 
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
-		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-ankle");
-		//displayDicomImage();
+		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
+		displayDicomImage();
 
-		std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
-		std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
+		//std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
+		//std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
 	}
 	};
 }
