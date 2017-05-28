@@ -19,6 +19,10 @@ private:
 	DicomInterface& operator=(const DicomInterface&) = delete;
 
 	void loadImage();
+	void loadAdminData();
+	DataRecord getDataRecord(imebra::TagId tag);
+	void setDataRecords(imebra::tagsIds_t tags);
+	imebra::tagsIds_t loadConfigTags();
 
 public:
 	static DicomInterface* getInstance();
@@ -28,4 +32,6 @@ public:
 
 	std::list<std::string> getDataRecordDescriptionList();
 	std::list<std::string> getDataRecordValueList();
+
+	DataRecord addDataRecord(uint16_t groupId, uint16_t elementId);
 };

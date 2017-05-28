@@ -154,7 +154,7 @@ namespace DICOM_browser {
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
 		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-ankle");
-		displayDicomImage();
+		//displayDicomImage();
 
 		std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
 		std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();

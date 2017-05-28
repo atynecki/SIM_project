@@ -50,8 +50,7 @@ string DataRecord::GetGroupIdAsString()
 	string hexStr;
 
 	std::stringstream sstream;
-	sstream << "0x"
-		<< std::setfill('0') << std::setw(4)
+	sstream << std::setfill('0') << std::setw(4)
 		<< std::hex << this->groupId;
 
 	hexStr = sstream.str();
@@ -80,8 +79,7 @@ string DataRecord::GetElementIdAsString()
 	string hexStr;
 
 	std::stringstream sstream;
-	sstream << "0x"
-		<< std::setfill('0') << std::setw(4)
+	sstream << std::setfill('0') << std::setw(4)
 		<< std::hex << this->elementId;
 
 	hexStr = sstream.str();
