@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>NOMINMAX</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Imebra\library\include\imebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Imebra\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>imebra.lib</AdditionalDependencies>
@@ -103,11 +103,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>NOMINMAX</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Imebra\library\include\imebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Imebra\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>imebra.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\Imebra\build\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Imebra\bin_x64_debug</AdditionalLibraryDirectories>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -115,7 +115,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOMINMAX</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Imebra\library\include\imebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Imebra\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>imebra.lib</AdditionalDependencies>
@@ -127,11 +127,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOMINMAX</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Imebra\library\include\imebra</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Imebra\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>imebra.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\Imebra\build\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Imebra\bin_x64_release</AdditionalLibraryDirectories>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -160,7 +160,20 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CONFIG.txt" />
+    <None Include="ClassDiagram.cd" />
+    <CustomBuild Include="Imebra.ref">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">COPY "$(ProjectDir)..\Imebra\bin_x64_debug\imebra.dll" "$(TargetDir)" &gt; NUL</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying Imebra binaries to output directory...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)imebra.dll</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\Imebra\bin_x64_debug\imebra.dll</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">COPY "$(ProjectDir)..\Imebra\bin_x64_release\imebra.dll" "$(TargetDir)" &gt; NUL</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying Imebra binaries to output directory...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)imebra.dll</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\Imebra\bin_x64_release\imebra.dll</AdditionalInputs>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

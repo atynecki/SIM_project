@@ -28,37 +28,6 @@ void DicomInterface::loadImage()
 	this->image = unique_ptr<imebra::Image>(this->dataSet->getImageApplyModalityTransform(0));
 }
 
-tagsIds_t DicomInterface::loadConfigTags()
-{
-	tagsIds_t configTags;
-
-	string line;
-	ifstream configFile("CONFIG.txt");
-	if (configFile.is_open())
-	{
-		while (getline(configFile, line))
-		{
-			string id;
-			int data[2];
-			stringstream ss(line);
-
-			for (int index = 0; index < 2; index++)
-			{
-				string value;
-				getline(ss, value, ',');
-				stringstream str;
-				str << value;
-				str >> std::hex >> data[index];
-			}
-			
-			configTags.push_back(TagId(data[0], data[1]));
-		}
-		configFile.close();
-	}
-
-	return configTags;
-}
-
 DataRecord DicomInterface::getDataRecord(TagId tag)
 {
 	string value;
@@ -104,7 +73,6 @@ void DicomInterface::setDataRecords(tagsIds_t tags)
 
 void DicomInterface::loadAdminData()
 {
-	//tagsIds_t tagList = loadConfigTags();
 	tagsIds_t tagList = dataSet->getTags();
 	setDataRecords(tagList);
 }

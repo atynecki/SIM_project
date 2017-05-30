@@ -22,7 +22,6 @@ private:
 	void loadAdminData();
 	DataRecord getDataRecord(imebra::TagId tag);
 	void setDataRecords(imebra::tagsIds_t tags);
-	imebra::tagsIds_t loadConfigTags();
 
 public:
 	static DicomInterface* getInstance();

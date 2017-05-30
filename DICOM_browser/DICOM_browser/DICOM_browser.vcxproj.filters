@@ -36,6 +36,7 @@
     <EmbeddedResource Include="MainView.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CONFIG.txt" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="Imebra.ref" />
   </ItemGroup>
 </Project>
