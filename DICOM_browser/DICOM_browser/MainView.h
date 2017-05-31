@@ -43,6 +43,11 @@ namespace DICOM_browser {
 			}
 		}
 	private: System::Windows::Forms::LinkLabel^  linkLabel1;
+	private: System::Windows::Forms::Panel^  panel1;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label1;
 	public:
 		void setName(String^ name)
@@ -76,14 +81,20 @@ namespace DICOM_browser {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(12, 23);
+			this->pictureBox1->Location = System::Drawing::Point(46, 45);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
+			this->pictureBox1->Size = System::Drawing::Size(592, 358);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -112,19 +123,70 @@ namespace DICOM_browser {
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"patient name";
 			// 
+			// panel1
+			// 
+			this->panel1->Controls->Add(this->label4);
+			this->panel1->Controls->Add(this->label3);
+			this->panel1->Controls->Add(this->label2);
+			this->panel1->Controls->Add(this->pictureBox1);
+			this->panel1->Location = System::Drawing::Point(48, 38);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(684, 426);
+			this->panel1->TabIndex = 3;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(3, 406);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(51, 20);
+			this->label4->TabIndex = 2;
+			this->label4->Text = L"label4";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(630, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(51, 20);
+			this->label3->TabIndex = 1;
+			this->label3->Text = L"label3";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(3, 10);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(51, 20);
+			this->label2->TabIndex = 0;
+			this->label2->Text = L"label2";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(916, 251);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(131, 71);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Save";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainView::button1_Click);
+			// 
 			// MainView
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1206, 694);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->linkLabel1);
-			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MainView";
 			this->Text = L"DICOM Browser";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &MainView::MainView_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -162,6 +224,23 @@ namespace DICOM_browser {
 				this->pictureBox1->Image = loadDicomImage();
 				this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			}
+
+			void savePanelToImageFile()
+			{
+				SaveFileDialog ^ saveImageDialog = gcnew SaveFileDialog();
+				saveImageDialog->Filter =
+					"JPG Image|*.jpg|Bitmap Image|*.bmp";
+				saveImageDialog->Title = "Save result";
+				saveImageDialog->RestoreDirectory = true;
+				if ((saveImageDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) && (saveImageDialog->FileName != ""))
+				{
+					System::Drawing::Rectangle rc = panel1->ClientRectangle;
+					Bitmap^ bmp = gcnew Bitmap(rc.Width, rc.Height);
+					this->panel1->DrawToBitmap(bmp, rc);
+
+					bmp->Save(saveImageDialog->FileName);
+				}
+			}
 #pragma endregion
 
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -172,5 +251,8 @@ namespace DICOM_browser {
 		//std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
 		//std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
 	}
-	};
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+		savePanelToImageFile();
+	}
+};
 }
