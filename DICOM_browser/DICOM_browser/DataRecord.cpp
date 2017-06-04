@@ -1,3 +1,12 @@
+/**
+*  @file    DataRecord.cpp
+*  @author  Artur Tynecki
+*  @date    May, 2017
+*
+*  @brief Data Record class source file
+*
+*/
+
 #include "DataRecord.h"
 
 #include <sstream>
@@ -49,6 +58,7 @@ string DataRecord::GetGroupIdAsString()
 {
 	string hexStr;
 
+	/* Converion to format: XXXX f.e. 0010*/
 	std::stringstream sstream;
 	sstream << std::setfill('0') << std::setw(4)
 		<< std::hex << this->groupId;
@@ -78,6 +88,7 @@ string DataRecord::GetElementIdAsString()
 {
 	string hexStr;
 
+	/* Converion to format: XXXX f.e. 0010*/
 	std::stringstream sstream;
 	sstream << std::setfill('0') << std::setw(4)
 		<< std::hex << this->elementId;

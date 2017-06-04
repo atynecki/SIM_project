@@ -1,5 +1,13 @@
 #include "DicomInterface.h"
 
+/**
+*  @file    DicomInterface.h
+*  @author  Artur Tynecki
+*  @date    May, 2017
+*
+*  @brief Dicom data service interface source file
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,6 +23,7 @@ DicomInterface* DicomInterface::s_instance = NULL;
 
 DicomInterface* DicomInterface::getInstance()
 {
+	/* Create instance if does not exist */
 	if (!s_instance)
 	{
 		s_instance = new DicomInterface;
@@ -25,6 +34,7 @@ DicomInterface* DicomInterface::getInstance()
 
 void DicomInterface::loadImage()
 {
+	/* Load first image from data set */
 	this->image = unique_ptr<imebra::Image>(this->dataSet->getImageApplyModalityTransform(0));
 }
 
@@ -35,14 +45,19 @@ DataRecord DicomInterface::getDataRecord(TagId tag)
 
 	DataRecord record;
 
+	/* Check if tag exist and it is different from image */
 	if ((dataSet->getTag(tag) != nullptr) && (tag.getGroupId() != 0x7FE0))
 	{
 		try
 		{
+			/* Get tag value */
 			value = dataSet->getString(tag, 0, "none");
 			if (value != "none")
 			{
+				/* Get tag description */
 				description = DicomDictionary::getTagName(tag);
+
+				/* Set data record */
 				record.SetDescription(description);
 				record.SetValue(value);
 				record.SetGroupId(tag.getGroupId());
@@ -66,6 +81,7 @@ void DicomInterface::setDataRecords(tagsIds_t tags)
 
 		if (!record.GetDescription().empty())
 		{
+			/* Add recrod to the list */
 			dataRecordList.push_back(record);
 		}
 	} 
@@ -73,13 +89,15 @@ void DicomInterface::setDataRecords(tagsIds_t tags)
 
 void DicomInterface::loadAdminData()
 {
+	/* Get all available tags from data set */
 	tagsIds_t tagList = dataSet->getTags();
+	/* Set data records */
 	setDataRecords(tagList);
 }
 
-/*API function*/
 void DicomInterface::loadData(string path)
 {
+	/* Load DICOM data form the file */
 	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
 	loadAdminData();
 	loadImage();
@@ -87,10 +105,10 @@ void DicomInterface::loadData(string path)
 
 string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 {
-	// Get the color space
+	/* Get the color space */
 	std::string colorSpace = image->getColorSpace();
 
-	// Get the size in pixels
+	/* Get the size in pixels */
 	*width = image->getWidth();
 	*height = image->getHeight();
 
@@ -98,14 +116,14 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 
 	if (imebra::ColorTransformsFactory::isMonochrome(colorSpace))
 	{
-		// Allocate a VOILUT transform. If the DataSet does not contain any pre-defined
-		//  settings then we will find the optimal ones.
+		/* Allocate a VOILUT transform. If the DataSet does not contain any pre-defined
+		settings then we will find the optimal ones. */
 		imebra::VOILUT voilutTransform;
 
-		// Retrieve the VOIs (center/width pairs)
+		/* Retrieve the VOIs (center/width pairs) */
 		imebra::vois_t vois = dataSet->getVOIs();
 
-		// Retrieve the LUTs
+		/* Retrieve the LUTs */
 		std::list<std::shared_ptr<imebra::LUT> > luts;
 		for (size_t scanLUTs(0); ; ++scanLUTs)
 		{
@@ -120,6 +138,7 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 			}
 		}
 
+		/* Set tranformation data */
 		if (!vois.empty())
 		{
 			voilutTransform.setCenterWidth(vois[0].center, vois[0].width);
@@ -133,28 +152,29 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, *width, *height);
 		}
 
+		/* Add transformation data to the chain */
 		chain.addTransform(voilutTransform);
 
-		// We create a DrawBitmap that always apply the chain transform before getting the RGB image
+		/* Create a DrawBitmap that always apply the chain transform before getting the RGB image */
 		imebra::DrawBitmap draw(chain);
 
-		// Ask for the size of the buffer (in bytes)
+		/* Ask for the size of the buffer (in bytes) */
 		size_t requestedBufferSize = draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGBA, 4, 0, 0);
 
-		// Now we allocate the buffer and then ask DrawBitmap to fill it
+		/* Allocate the buffer and then ask DrawBitmap to fill it */
 		std::string buffer(requestedBufferSize, char(0));
 		draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGBA, 4, &(buffer.at(0)), requestedBufferSize);
+		
 		return buffer;
 	}
 	else
 	{
+		/* Set image without tranformation */
 		imebra::DrawBitmap draw(chain);
-		// Ask for the size of the buffer (in bytes)
 		size_t requestedBufferSize = draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGB, 4, 0, 0);
-
-		// Now we allocate the buffer and then ask DrawBitmap to fill it
 		std::string buffer(requestedBufferSize, char(0));
 		draw.getBitmap(*image.get(), imebra::drawBitmapType_t::drawBitmapRGB, 4, &(buffer.at(0)), requestedBufferSize);
+		
 		return buffer;
 	}
 }
@@ -165,6 +185,7 @@ list<string> DicomInterface::getDataRecordDescriptionList()
 
 	for each(DataRecord it in dataRecordList)
 	{
+		/* Set record description with format: descpritonValue (groupId,elementId) f.e. Patient Name (0010,0010)*/
 		descriptions.push_back(it.GetDescription() + " (" + it.GetGroupIdAsString() + "," + it.GetElementIdAsString() + ")");
 	}
 
@@ -187,8 +208,10 @@ DataRecord DicomInterface::addDataRecord(uint16_t groupId, uint16_t elementId)
 {
 	TagId id(groupId, elementId);
 
+	/* Create new data record */
 	DataRecord newRecord = getDataRecord(id);
 
+	/* If tag exist add to the list */
 	if (!newRecord.GetDescription().empty())
 	{
 		dataRecordList.push_back(newRecord);

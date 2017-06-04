@@ -49,20 +49,7 @@ namespace DICOM_browser {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label1;
-	public:
-		void setName(String^ name)
-		{
-			this->label1->Text = name;
-		}
-	protected:
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
-			 Bitmap^ image;
-	public:
-		void setImage(Bitmap^ image)
-		{
-			this->pictureBox1->Image = image;
-		}
-
 	protected:
 
 	private:
@@ -195,20 +182,37 @@ namespace DICOM_browser {
 
 #pragma region View controller code
 		private:
+			/**
+			*  @brief Load DICOM data from file
+			*
+			*  @param [in] path - path to DICOM file
+			*  @return none
+			*/
 			void loadDicomData(std::string path)
 			{
 				DicomInterface::getInstance()->loadData(path);
 			}
 
+			/**
+			*  @brief Load DICOM image
+			*
+			*  Get image from Dicom interface and transform to Bitmap
+			*  @param none
+			*  @return dicom image in Bitmap form
+			*/
 			Bitmap^ loadDicomImage()
 			{
 				uint32_t width;
 				uint32_t height;
 				std::string imageBuffer;
 
+				/* Get DICOM image buffer */
 				imageBuffer = DicomInterface::getInstance()->getImage(&width, &height);
+				
+				/* Create bitmap */
 				Bitmap^ image = gcnew Bitmap(width, height);
 
+				/* Set bitmap pixels */
 				BitmapData^ bmpData = image->LockBits(System::Drawing::Rectangle(0, 0, width, height),
 					ImageLockMode::ReadWrite, PixelFormat::Format32bppRgb);
 				cli::array<Byte>^ pixels = gcnew cli::array<Byte>(imageBuffer.size());
@@ -219,25 +223,45 @@ namespace DICOM_browser {
 				return image;
 			}
 
+			/**
+			*  @brief Display DICOM image
+			*
+			*  Load dicom image and add to picture box
+			*  @param none
+			*  @return none
+			*/
 			void displayDicomImage()
 			{
 				this->pictureBox1->Image = loadDicomImage();
 				this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
 			}
 
+			/**
+			*  @brief Save data panel to image file
+			*
+			*  Get destination path and extansion with SaveImageDialog, save panel to image file
+			*  @param none
+			*  @return none
+			*/
 			void savePanelToImageFile()
 			{
+				/* Show save image dialog */
 				SaveFileDialog ^ saveImageDialog = gcnew SaveFileDialog();
 				saveImageDialog->Filter =
 					"JPG Image|*.jpg|Bitmap Image|*.bmp";
 				saveImageDialog->Title = "Save result";
 				saveImageDialog->RestoreDirectory = true;
+
+				/* Get destination path and image extension */
 				if ((saveImageDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) && (saveImageDialog->FileName != ""))
 				{
 					System::Drawing::Rectangle rc = panel1->ClientRectangle;
 					Bitmap^ bmp = gcnew Bitmap(rc.Width, rc.Height);
+					
+					/* Fram panel to bitmap */
 					this->panel1->DrawToBitmap(bmp, rc);
 
+					/* Save bitmap to image file */
 					bmp->Save(saveImageDialog->FileName);
 				}
 			}
@@ -245,6 +269,7 @@ namespace DICOM_browser {
 
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
+		/* Example of use DicomInterface */
 		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
 		displayDicomImage();
 
@@ -252,6 +277,7 @@ namespace DICOM_browser {
 		//std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+		/* Example of use SavePaneToImageFile */
 		savePanelToImageFile();
 	}
 };
