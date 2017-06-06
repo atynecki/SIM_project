@@ -107,18 +107,18 @@ public:
 	*
 	*  Select tag description from data set, format and return
 	*  @param none
-	*  @return dicom data description list
+	*  @return dicom data description vector
 	*/
-	std::list<std::string> getDataRecordDescriptionList();
+	std::vector<std::string> getDataRecordDescriptionList();
 
 	/**
 	*  @brief Get data record value list
 	*
 	*  Select tag value from data set, format and return
 	*  @param none
-	*  @return dicom data value list
+	*  @return dicom data value vector
 	*/
-	std::list<std::string> getDataRecordValueList();
+	std::vector<std::string> getDataRecordValueList();
 
 	/**
 	*  @brief Add data record to list

@@ -2,6 +2,7 @@
 
 #include "DicomInterface.h"
 #include <list>
+#include <vector>
 
 namespace DICOM_browser {
 
@@ -273,8 +274,8 @@ namespace DICOM_browser {
 		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
 		displayDicomImage();
 
-		//std::list<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
-		//std::list<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
+		//std::vector<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
+		//std::vector<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		/* Example of use SavePaneToImageFile */

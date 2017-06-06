@@ -179,9 +179,9 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 	}
 }
 
-list<string> DicomInterface::getDataRecordDescriptionList()
+vector<string> DicomInterface::getDataRecordDescriptionList()
 {
-	list<string> descriptions;
+	vector<string> descriptions;
 
 	for each(DataRecord it in dataRecordList)
 	{
@@ -192,9 +192,9 @@ list<string> DicomInterface::getDataRecordDescriptionList()
 	return descriptions;
 }
 
-list<string> DicomInterface::getDataRecordValueList()
+vector<string> DicomInterface::getDataRecordValueList()
 {
-	list<string> values;
+	vector<string> values;
 
 	for each(DataRecord it in dataRecordList)
 	{
