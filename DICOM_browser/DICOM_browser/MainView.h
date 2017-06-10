@@ -249,7 +249,7 @@ namespace DICOM_browser {
 				/* Show save image dialog */
 				SaveFileDialog ^ saveImageDialog = gcnew SaveFileDialog();
 				saveImageDialog->Filter =
-					"JPG Image|*.jpg|Bitmap Image|*.bmp";
+					"JPG Image | *.jpg | JPEG Image | *.jpeg | Bitmap Image | *.bmp | GIF Image | *.gif | PNG Image | *.png | TIFF Image | *.tiff";
 				saveImageDialog->Title = "Save result";
 				saveImageDialog->RestoreDirectory = true;
 
