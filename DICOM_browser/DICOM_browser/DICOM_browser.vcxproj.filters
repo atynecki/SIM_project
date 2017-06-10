@@ -20,6 +20,9 @@
     <ClCompile Include="DataRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImageData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainView.h">
@@ -31,12 +34,14 @@
     <ClInclude Include="DataRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImageData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainView.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="Imebra.ref" />
+    <CustomBuild Include="Imebra.ref" />
   </ItemGroup>
 </Project>

@@ -203,12 +203,12 @@ namespace DICOM_browser {
 			*/
 			Bitmap^ loadDicomImage()
 			{
-				uint32_t width;
-				uint32_t height;
+				uint32_t width = DicomInterface::getInstance()->GetImageData()->GetWidth();
+				uint32_t height = DicomInterface::getInstance()->GetImageData()->GetHeight();
 				std::string imageBuffer;
 
 				/* Get DICOM image buffer */
-				imageBuffer = DicomInterface::getInstance()->getImage(&width, &height);
+				imageBuffer = DicomInterface::getInstance()->getImage();
 				
 				/* Create bitmap */
 				Bitmap^ image = gcnew Bitmap(width, height);
@@ -234,7 +234,7 @@ namespace DICOM_browser {
 			void displayDicomImage()
 			{
 				this->pictureBox1->Image = loadDicomImage();
-				this->pictureBox1->SizeMode = PictureBoxSizeMode::AutoSize;
+				this->pictureBox1->SizeMode = PictureBoxSizeMode::Zoom;
 			}
 
 			/**
@@ -266,16 +266,34 @@ namespace DICOM_browser {
 					bmp->Save(saveImageDialog->FileName);
 				}
 			}
+
+			/**
+			*  @brief Change image contrast
+			*
+			*  @param
+			*  @return
+			*/
+			void changeContrast(double windowCenter, double windowWidth)
+			{
+				DicomInterface::getInstance()->SetImageVOI(windowCenter, windowWidth);
+				displayDicomImage();
+			}
 #pragma endregion
 
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
 		/* Example of use DicomInterface */
-		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
-		displayDicomImage();
+		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-chest");
+		//displayDicomImage();
 
 		//std::vector<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
 		//std::vector<std::string> val = DicomInterface::getInstance()->getDataRecordValueList();
+		int32_t maxPixel = DicomInterface::getInstance()->GetImageData()->GetMaxPixel();
+		int32_t minPixel = DicomInterface::getInstance()->GetImageData()->GetMinPixel();
+		double windowCenter = DicomInterface::getInstance()->GetImageData()->GetVOI().center;
+		double windowWidth = DicomInterface::getInstance()->GetImageData()->GetVOI().width;
+
+		changeContrast(windowCenter, (windowWidth/3));
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		/* Example of use SavePaneToImageFile */

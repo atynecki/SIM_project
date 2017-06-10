@@ -36,6 +36,51 @@ void DicomInterface::loadImage()
 {
 	/* Load first image from data set */
 	this->image = unique_ptr<imebra::Image>(this->dataSet->getImageApplyModalityTransform(0));
+	
+	/* Get the size in pixels */
+	long width = image->getWidth();
+	long height = image->getHeight();
+
+	/* Get the color space */
+	std::string colorSpace = image->getColorSpace();
+
+	this->imageData = ImageData(width, height, colorSpace);
+
+	/* Get the VOI (center/width pairs) */
+	vois_t vois = dataSet->getVOIs();
+	if (!vois.empty())
+	{
+		VOIDescription voi = vois[0];
+		wstring desc(L"VOI");
+		voi.description = desc;
+		imageData.SetVOI(voi);
+	}
+	
+
+	// Retrieve the data handler
+	std::unique_ptr<imebra::ReadingDataHandlerNumeric> dataHandler(image->getReadingDataHandler());
+
+	// Get max and min value
+	if (imebra::ColorTransformsFactory::isMonochrome(colorSpace))
+	{
+		for (std::uint32_t scanY(0); scanY != height; ++scanY)
+		{
+			for (std::uint32_t scanX(0); scanX != width; ++scanX)
+			{
+				// For monochrome images
+				std::int32_t value = dataHandler->getSignedLong(scanY * width + scanX);
+				if (value > imageData.GetMaxPixel())
+				{
+					imageData.SetMaxPixel(value);
+				}
+
+				if (value < imageData.GetMinPixel())
+				{
+					imageData.SetMinPixel(value);
+				}
+			}
+		}
+	}
 }
 
 DataRecord DicomInterface::getDataRecord(TagId tag)
@@ -45,7 +90,7 @@ DataRecord DicomInterface::getDataRecord(TagId tag)
 
 	DataRecord record;
 
-	/* Check if tag exist and it is different from image */
+	/* Check if tag exist and it is different from pixel image */
 	if ((dataSet->getTag(tag) != nullptr) && (tag.getGroupId() != 0x7FE0))
 	{
 		try
@@ -99,32 +144,23 @@ void DicomInterface::loadData(string path)
 {
 	/* Load DICOM data form the file */
 	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
+	dataRecordList = std::list<DataRecord>();
 	loadAdminData();
 	loadImage();
 }
 
-string DicomInterface::getImage(uint32_t* width, uint32_t* height)
+string DicomInterface::getImage()
 {
-	/* Get the color space */
-	std::string colorSpace = image->getColorSpace();
-
-	/* Get the size in pixels */
-	*width = image->getWidth();
-	*height = image->getHeight();
-
 	imebra::TransformsChain chain;
 
-	if (imebra::ColorTransformsFactory::isMonochrome(colorSpace))
+	if (imebra::ColorTransformsFactory::isMonochrome(imageData.GetColorSpace()))
 	{
 		/* Allocate a VOILUT transform. If the DataSet does not contain any pre-defined
 		settings then we will find the optimal ones. */
 		imebra::VOILUT voilutTransform;
 
-		/* Retrieve the VOIs (center/width pairs) */
-		imebra::vois_t vois = dataSet->getVOIs();
-
 		/* Retrieve the LUTs */
-		std::list<std::shared_ptr<imebra::LUT> > luts;
+		/*std::list<std::shared_ptr<imebra::LUT> > luts;
 		for (size_t scanLUTs(0); ; ++scanLUTs)
 		{
 			try
@@ -136,20 +172,21 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 			{
 				break;
 			}
-		}
+		}*/
 
 		/* Set tranformation data */
-		if (!vois.empty())
+		VOIDescription voi = imageData.GetVOI();
+		if (!voi.description.empty())
 		{
-			voilutTransform.setCenterWidth(vois[0].center, vois[0].width);
+			voilutTransform.setCenterWidth(voi.center, voi.width);
 		}
-		else if (!luts.empty())
+		/*else if (!luts.empty())
 		{
 			voilutTransform.setLUT(*(luts.front().get()));
-		}
+		}*/
 		else
 		{
-			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, *width, *height);
+			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, imageData.GetWidth(), imageData.GetHeight());
 		}
 
 		/* Add transformation data to the chain */
@@ -178,6 +215,8 @@ string DicomInterface::getImage(uint32_t* width, uint32_t* height)
 		return buffer;
 	}
 }
+
+
 
 vector<string> DicomInterface::getDataRecordDescriptionList()
 {
@@ -218,6 +257,21 @@ DataRecord DicomInterface::addDataRecord(uint16_t groupId, uint16_t elementId)
 	}
 
 	return newRecord;
+}
+
+ImageData* DicomInterface::GetImageData() 
+{
+	return &imageData;
+}
+
+void DicomInterface::SetImageVOI(double center, double width)
+{
+	VOIDescription voi;
+	voi.center = center;
+	voi.width = width;
+	wstring desc(L"VOI");
+	voi.description = desc;
+	imageData.SetVOI(voi);
 }
 
 

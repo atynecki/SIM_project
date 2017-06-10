@@ -18,14 +18,15 @@
 #include <imebra.h>
 #include <list>
 #include "DataRecord.h"
+#include "ImageData.h"
 
 class DicomInterface
 {
 private:
 	std::unique_ptr<imebra::DataSet> dataSet;	/**< DICOM data set */
 	std::unique_ptr<imebra::Image> image;		/**< DICOM image */
+	ImageData imageData;						/**< DICOM image data */
 	std::list<DataRecord> dataRecordList;		/**< DICOM data record list */
-
 	static DicomInterface* s_instance;			/**< DICOM interface instance */
 
 	/**
@@ -95,12 +96,10 @@ public:
 	/**
 	*  @brief Get DICOM image
 	*
-	*  Get DICOM image from 0 index, add 
-	*  @param [out] width - result image width 
-	*  @param [out] height - result image height
+	*  Get DICOM image from 0 index
 	*  @return image buffer
 	*/
-	std::string getImage(uint32_t* width, uint32_t* height);
+	std::string getImage();
 
 	/**
 	*  @brief Get data record descriptiom list
@@ -130,4 +129,20 @@ public:
 	*  @return DICOM data record
 	*/
 	DataRecord addDataRecord(uint16_t groupId, uint16_t elementId);
+
+	/**
+	*  @brief Get image data
+	*
+	*  @param none
+	*  @return Pointer to image 
+	*/
+	ImageData* GetImageData();
+
+	/**
+	*  @brief 
+	*
+	*  @param
+	*  @return
+	*/
+	void SetImageVOI(double center, double width);
 };

@@ -145,11 +145,13 @@
   <ItemGroup>
     <ClCompile Include="DataRecord.cpp" />
     <ClCompile Include="DicomInterface.cpp" />
+    <ClCompile Include="ImageData.cpp" />
     <ClCompile Include="MainView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataRecord.h" />
     <ClInclude Include="DicomInterface.h" />
+    <ClInclude Include="ImageData.h" />
     <ClInclude Include="MainView.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -160,7 +162,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <CustomBuild Include="Imebra.ref">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <FileType>Document</FileType>
