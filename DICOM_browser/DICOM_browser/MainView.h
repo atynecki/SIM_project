@@ -270,8 +270,9 @@ namespace DICOM_browser {
 			/**
 			*  @brief Change image contrast
 			*
-			*  @param
-			*  @return
+			*  @param [in] windowCenter - value of window center
+			*  @param [in] windowWidth - value of window width
+			*  @return none
 			*/
 			void changeContrast(double windowCenter, double windowWidth)
 			{
@@ -283,7 +284,7 @@ namespace DICOM_browser {
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
 		/* Example of use DicomInterface */
-		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-chest");
+		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
 		//displayDicomImage();
 
 		//std::vector<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
@@ -293,7 +294,7 @@ namespace DICOM_browser {
 		double windowCenter = DicomInterface::getInstance()->GetImageData()->GetVOI().center;
 		double windowWidth = DicomInterface::getInstance()->GetImageData()->GetVOI().width;
 
-		changeContrast(windowCenter, (windowWidth/3));
+		changeContrast(windowCenter, (windowWidth*0.5));
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		/* Example of use SavePaneToImageFile */

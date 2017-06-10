@@ -55,7 +55,6 @@ void DicomInterface::loadImage()
 		voi.description = desc;
 		imageData.SetVOI(voi);
 	}
-	
 
 	// Retrieve the data handler
 	std::unique_ptr<imebra::ReadingDataHandlerNumeric> dataHandler(image->getReadingDataHandler());
@@ -63,23 +62,29 @@ void DicomInterface::loadImage()
 	// Get max and min value
 	if (imebra::ColorTransformsFactory::isMonochrome(colorSpace))
 	{
+		int32_t min = imageData.GetMinPixel();
+		int32_t max = imageData.GetMaxPixel();
+
 		for (std::uint32_t scanY(0); scanY != height; ++scanY)
 		{
 			for (std::uint32_t scanX(0); scanX != width; ++scanX)
 			{
 				// For monochrome images
 				std::int32_t value = dataHandler->getSignedLong(scanY * width + scanX);
-				if (value > imageData.GetMaxPixel())
+				if (value > max)
 				{
-					imageData.SetMaxPixel(value);
+					max = value;
 				}
 
-				if (value < imageData.GetMinPixel())
+				if (value < min)
 				{
-					imageData.SetMinPixel(value);
+					min = value;
 				}
 			}
 		}
+
+		imageData.SetMaxPixel(max);
+		imageData.SetMinPixel(min);
 	}
 }
 
@@ -160,7 +165,7 @@ string DicomInterface::getImage()
 		imebra::VOILUT voilutTransform;
 
 		/* Retrieve the LUTs */
-		/*std::list<std::shared_ptr<imebra::LUT> > luts;
+		std::list<std::shared_ptr<imebra::LUT> > luts;
 		for (size_t scanLUTs(0); ; ++scanLUTs)
 		{
 			try
@@ -172,7 +177,7 @@ string DicomInterface::getImage()
 			{
 				break;
 			}
-		}*/
+		}
 
 		/* Set tranformation data */
 		VOIDescription voi = imageData.GetVOI();
@@ -180,10 +185,10 @@ string DicomInterface::getImage()
 		{
 			voilutTransform.setCenterWidth(voi.center, voi.width);
 		}
-		/*else if (!luts.empty())
+		else if (!luts.empty())
 		{
 			voilutTransform.setLUT(*(luts.front().get()));
-		}*/
+		}
 		else
 		{
 			voilutTransform.applyOptimalVOI(*image.get(), 0, 0, imageData.GetWidth(), imageData.GetHeight());
@@ -266,6 +271,7 @@ ImageData* DicomInterface::GetImageData()
 
 void DicomInterface::SetImageVOI(double center, double width)
 {
+	/* Create new VOI*/
 	VOIDescription voi;
 	voi.center = center;
 	voi.width = width;

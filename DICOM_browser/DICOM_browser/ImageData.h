@@ -8,7 +8,7 @@
 *  @brief Image Data class header file
 *
 * A class represetning DICOM image details. It contains information such as:
-* image size (width, height), image VOI center ,image VOI width, minimum and maximum pixel values
+* image size (width, height), color space, VOI, minimum and maximum pixel values
 *
 */
 
@@ -37,7 +37,7 @@ public:
 	*
 	*  @param [in] width - DICOM image width
 	*  @param [in] height - DICOM image height
-	*  @param [in] vois - DICOM image VOIs
+	*  @param [in] colorSpace - DICOM image color space
 	*/
 	ImageData(long width, long height, std::string colorSpace);
 
@@ -106,7 +106,7 @@ public:
 	imebra::VOIDescription GetVOI();
 
 	/**
-	*  @brief Set VOI center
+	*  @brief Set VOI
 	*
 	*  @param [in] value - value to set
 	*  @return none

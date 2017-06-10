@@ -17,7 +17,7 @@ ImageData::ImageData()
 {
 	this->imageWidth = 0;
 	this->imageHeight = 0;
-	this->minPixel = numeric_limits<int32_t>::max();
+	this->minPixel = 0;
 	this->maxPixel = 0;
 }
 

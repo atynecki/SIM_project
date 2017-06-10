@@ -134,15 +134,16 @@ public:
 	*  @brief Get image data
 	*
 	*  @param none
-	*  @return Pointer to image 
+	*  @return Pointer to image data
 	*/
 	ImageData* GetImageData();
 
 	/**
-	*  @brief 
+	*  @brief Set image VOI
 	*
-	*  @param
-	*  @return
+	*  @param [in] center - window center
+	*  @param [in] width - window width
+	*  @return none
 	*/
 	void SetImageVOI(double center, double width);
 };
