@@ -32,7 +32,7 @@ private:
 	/**
 	*  @brief Default constructor (unavailable)
 	*/
-	DicomInterface() {};
+	DicomInterface();
 
 	/**
 	*  @brief Copy constructor (unavailable)

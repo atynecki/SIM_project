@@ -21,6 +21,11 @@ using namespace imebra;
 
 DicomInterface* DicomInterface::s_instance = NULL;
 
+DicomInterface::DicomInterface()
+{
+	dataRecordList = list<DataRecord>();
+}
+
 DicomInterface* DicomInterface::getInstance()
 {
 	/* Create instance if does not exist */
@@ -125,6 +130,8 @@ DataRecord DicomInterface::getDataRecord(TagId tag)
 
 void DicomInterface::setDataRecords(tagsIds_t tags)
 {
+	/* Clear data record list */
+	dataRecordList.clear();
 	for each(TagId it in tags)
 	{
 		DataRecord record = getDataRecord(it);
@@ -149,7 +156,6 @@ void DicomInterface::loadData(string path)
 {
 	/* Load DICOM data form the file */
 	this->dataSet = unique_ptr<DataSet>(CodecFactory::load(StreamReader(FileStreamInput(path))));
-	dataRecordList = std::list<DataRecord>();
 	loadAdminData();
 	loadImage();
 }
