@@ -284,7 +284,7 @@ namespace DICOM_browser {
 	private: System::Void MainView_Load(System::Object^  sender, System::EventArgs^  e) {
 		
 		/* Example of use DicomInterface */
-		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-brain");
+		loadDicomData("D:\\Projects\\GIT\\SIM_project\\image\\CT-MONO2-16-ankle");
 		//displayDicomImage();
 
 		//std::vector<std::string> desc = DicomInterface::getInstance()->getDataRecordDescriptionList();
@@ -293,6 +293,7 @@ namespace DICOM_browser {
 		int32_t minPixel = DicomInterface::getInstance()->GetImageData()->GetMinPixel();
 		double windowCenter = DicomInterface::getInstance()->GetImageData()->GetVOI().center;
 		double windowWidth = DicomInterface::getInstance()->GetImageData()->GetVOI().width;
+		std::string windowWidthStr = DicomInterface::getInstance()->GetImageData()->GetWindowWidth();
 
 		changeContrast(windowCenter, (windowWidth*0.5));
 	}

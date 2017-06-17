@@ -48,8 +48,11 @@ void DicomInterface::loadImage()
 
 	/* Get the color space */
 	std::string colorSpace = image->getColorSpace();
+	
+	/* Get window width */
+	std::string windowWidth = dataSet->getString(tagId_t::WindowWidth_0028_1051, 0, "");
 
-	this->imageData = ImageData(width, height, colorSpace);
+	this->imageData = ImageData(width, height, colorSpace, windowWidth);
 
 	/* Get the VOI (center/width pairs) */
 	vois_t vois = dataSet->getVOIs();

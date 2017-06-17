@@ -21,11 +21,12 @@ ImageData::ImageData()
 	this->maxPixel = 0;
 }
 
-ImageData::ImageData(long width, long height, string colorSpace)
+ImageData::ImageData(long width, long height, string colorSpace, string windowWidth)
 {
 	this->imageWidth = width;
 	this->imageHeight = height;
 	this->colorSpace = colorSpace;
+	this->windowWidth = windowWidth;
 	this->minPixel = numeric_limits<int32_t>::max();
 	this->maxPixel = 0;
 }
@@ -43,6 +44,11 @@ long ImageData::GetHeight()
 string ImageData::GetColorSpace()
 {
 	return this->colorSpace;
+}
+
+string ImageData::GetWindowWidth()
+{
+	return this->windowWidth;
 }
 
 int32_t ImageData::GetMinPixel()

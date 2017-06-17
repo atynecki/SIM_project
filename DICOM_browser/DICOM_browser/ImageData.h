@@ -22,6 +22,7 @@ private:
 	long imageWidth;									/**< DICOM image width */
 	long imageHeight;									/**< DICOM image height */
 	std::string colorSpace;								/**< DICOM image color space */
+	std::string windowWidth;							/**< DICOM image window width */
 	int32_t minPixel;									/**< DICOM image minimum pixel value */
 	int32_t maxPixel;									/**< DICOM image maximum pixel value */
 	imebra::VOIDescription VOI;							/**< DICOM image VOI */
@@ -38,8 +39,9 @@ public:
 	*  @param [in] width - DICOM image width
 	*  @param [in] height - DICOM image height
 	*  @param [in] colorSpace - DICOM image color space
+	*  @param [in] windowWidth - DICOM image windowWidth
 	*/
-	ImageData(long width, long height, std::string colorSpace);
+	ImageData(long width, long height, std::string colorSpace, std::string windowWidth);
 
 	/**
 	*  @brief Get width
@@ -64,6 +66,14 @@ public:
 	*  @return value of color space
 	*/
 	std::string GetColorSpace();
+
+	/**
+	*  @brief Get window width
+	*
+	*  @param none
+	*  @return value of window width
+	*/
+	std::string GetWindowWidth();
 
 	/**
 	*  @brief Get minimum pixel
