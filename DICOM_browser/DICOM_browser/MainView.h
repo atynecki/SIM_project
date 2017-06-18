@@ -2197,7 +2197,7 @@ namespace Project2 {
 #pragma region Code of application
 
 		/**
-		*  @author Jakub Maci¹g
+		*  @author Jakub MaciÂ¹g
 		*  @brief Creating array of comboboxes
 		*
 		*  @param [in] array<ComboBox^>^ comboList
@@ -2260,7 +2260,7 @@ namespace Project2 {
 	}
 
 			/**
-			*  @author Jakub Maci¹g
+			*  @author Jakub MaciÂ¹g
 			*  @brief Creating array of textboxes
 			*
 			*  @param [in] array<TextBox^>^ textBoxList
@@ -2323,7 +2323,7 @@ namespace Project2 {
 	}
 
 			/**
-			*  @author Jakub Maci¹g
+			*  @author Jakub MaciÂ¹g
 			*  @brief Creating array of textboxes for tags labels
 			*
 			*  @param [in] array<TextBox^>^ textBoxFlagList
@@ -2385,7 +2385,7 @@ namespace Project2 {
 	}
 
 			/**
-			*  @author Jakub Maci¹g
+			*  @author Jakub MaciÂ¹g
 			*  @brief Loading MainView windows form do: hide combobox on panel and create arrays of comboboxes and textboxes
 			*
 			*  @param [in] array<TextBox^>^ textBoxFlagList
@@ -2403,7 +2403,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g and Emilia Siemieniuk and Paulina Nowak
+			 *  @author Jakub MaciÂ¹g and Emilia Siemieniuk and Paulina Nowak
 			 *  @brief open file button listener
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2421,7 +2421,7 @@ namespace Project2 {
 			return;
 		}
 
-		/// path conversion - Jakub Maci¹g
+		/// path conversion - Jakub MaciÂ¹g
 		String^ fullPath = openDial->FileName;
 		std::string path = msclr::interop::marshal_as<std::string>(fullPath);
 		///load dicom data
@@ -2455,7 +2455,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief save button listener
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2467,7 +2467,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief reset button listener
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2483,7 +2483,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief AddTagForm button listener
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2513,7 +2513,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief load button listener
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2523,6 +2523,8 @@ namespace Project2 {
 	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 		///read every combobox and textbox and if it is not empty then write it to data list for using it on panel
 		///add data list to combobox on panel 
+		dataLX->RemoveRange(0, dataLX->Count);
+		tagsComboBox->Items->Clear();
 		for (int i = 0; i < 50; i++)
 		{
 			if ((textBoxFList[i]->Text->Equals("")) && (textBoxList[i]->Text->Equals("")))
@@ -2539,7 +2541,7 @@ namespace Project2 {
 
 #pragma region Contrast
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief WW changer - trackBar 1
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2555,7 +2557,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief WC changer - trackBar 2
 			 *
 			 *  @param [in] System::Object^  sender
@@ -2677,7 +2679,7 @@ namespace Project2 {
 	}
 
 			 /**
-			 *  @author Jakub Maci¹g
+			 *  @author Jakub MaciÂ¹g
 			 *  @brief Change font size listener
 			 *
 			 *  @param [in] System::Object^  sender
