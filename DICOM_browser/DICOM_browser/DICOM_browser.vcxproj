@@ -143,15 +143,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddTagForm.cpp" />
     <ClCompile Include="DataRecord.cpp" />
     <ClCompile Include="DicomInterface.cpp" />
     <ClCompile Include="ImageData.cpp" />
+    <ClCompile Include="Interface2.cpp" />
     <ClCompile Include="MainView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddTagForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="DataRecord.h" />
     <ClInclude Include="DicomInterface.h" />
     <ClInclude Include="ImageData.h" />
+    <ClInclude Include="Interface2.h" />
     <ClInclude Include="MainView.h">
       <FileType>CppForm</FileType>
     </ClInclude>
