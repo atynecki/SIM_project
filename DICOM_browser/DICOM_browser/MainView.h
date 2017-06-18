@@ -37,6 +37,19 @@ namespace Project2 {
 
 #pragma region GUI
 	/// <summary>
+	/// Double buffered panel class for display DICOM image
+	/// </summary>
+	private ref class DoubleBufferedPanel : public Panel {
+	public :
+		DoubleBufferedPanel()
+		{
+			SetStyle(ControlStyles::AllPaintingInWmPaint, true);
+			SetStyle(ControlStyles::OptimizedDoubleBuffer, true);
+			UpdateStyles();
+		}
+	};
+
+	/// <summary>
 	/// Summary for MainView
 	/// </summary>
 	public ref class MainView : public System::Windows::Forms::Form
@@ -78,7 +91,7 @@ namespace Project2 {
 	private:System::Collections::Generic::List<String^>^ listDesc = gcnew System::Collections::Generic::List<String^>();
 	private:System::Collections::Generic::List<String^>^ dataLX = gcnew System::Collections::Generic::List<String^>();
 	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
-	private: System::Windows::Forms::Panel^  panel1;
+	private: DoubleBufferedPanel^ panel1;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button3;
@@ -418,7 +431,7 @@ namespace Project2 {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->panel1 = (gcnew DoubleBufferedPanel());
 			this->tagsComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
