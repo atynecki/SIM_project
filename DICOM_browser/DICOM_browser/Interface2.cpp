@@ -112,13 +112,14 @@ void Interface2::clearText(array<TextBox^>^ tx)
 void Interface2::setItemsToCombo(array<ComboBox^>^ comboList, std::vector<std::string> desc)
 {
 	array<String^>^ stringArray1 = gcnew array<String^>(desc.size());
+	for (int i = 0; i < desc.size(); i++)
+	{
+		stringArray1[i] = gcnew String(desc[i].c_str());
+	}
+	
 	for (int j = 0; j < comboList->Length; j++)
 	{
-		for (int i = 0; i < desc.size(); i++)
-		{
-			stringArray1[i] = gcnew String(desc[i].c_str());
-			comboList[j]->Items->Add(stringArray1[i]);
-		}
+		comboList[j]->Items->AddRange(stringArray1);
 	}
 }
 
